@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-appdynamics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-appdynamics
+  template:
+    metadata:
+      labels:
+        app: rest-appdynamics
+    spec:
+      containers:
+        - name: rest-appdynamics
+          image: hughbrien/rest-appdynamics:release-1.0.0
+
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-appdynamics-service
+spec:
+  selector:
+    app: rest-appdynamics
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

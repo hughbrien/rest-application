@@ -1,0 +1,433 @@
+global:
+  clusterName: macos-cluster
+appdynamics-cloud-k8s-monitoring:
+  install:
+    clustermon: true 
+    defaultInfraCollectors: true 
+    logCollector: true    
+
+  # # The name to be used for creating the service account for the cluster collector.
+  # # [Default]
+  # clustermonServiceAccount: appdynamics-clustermon
+
+  # # The name to be used for creating the service account for the infrastructure collector.
+  # # [Default]
+  # inframonServiceAccount: appdynamics-inframon
+
+  # # The name to be used for creating the service account for the log collector agent.
+  # # [Default]
+  # logCollectorServiceAccount: appdynamics-log-collector
+
+  # Configurations for the cluster collector
+  clustermonConfig:
+    os: linux
+
+    # # The log level of the collector. (info/debug)
+    # # [Default]
+    # logLevel: info
+
+    # # The maximum size of one log file (in MB).
+    # # [Default]
+    # logFilesMaxSizeMb: 10
+
+    # # The maximum number of log files created before overwriting the oldest one.
+    # # [Default]
+    # logFilesNumBackups: 4
+
+    # # Whether Kubernetes® logs will report logs.
+    # # [Default]
+    # printToStdout: true
+
+    # # The filters that you can use for monitoring. You can include these filters:
+    # # namespace: The namespaces to be monitored.
+    # # entity: The entities that are excluded from monitoring.
+    # # label: The labels that are excluded from reporting.
+    # # annotation: The annotations that are excluded from reporting.
+    # # [Default]
+    # filters:
+    #   namespace:
+    #     includeRegex: ".*"
+    #     excludeRegex: ""
+    #   entity:
+    #     excludeRegex: "kube-root-ca.crt|openshift-service-ca.crt"
+    #     excludeLabels:
+    #   label:
+    #     excludeRegex: ""
+    #   annotation:
+    #     excludeRegex: ""
+
+    # # Configuration override for ingress controller labels and metrics port.
+    # # [Default]
+    # ingressControllers:
+    #   nginx: 
+    #     port: 10254
+    #     labels: 
+    #     app.kubernetes.io/component: controller
+    #     app.kubernetes.io/instance: ingress-nginx
+    #     app.kubernetes.io/name: ingress-nginx
+
+    # # The events that require collection. You can exclude the required events based on the severity (INFO, WARNING, SEVERE) and Kubernetes event reason.
+    # # You can create a custom event group classified as severe events. This classifies the events as severe based on the list of event reasons that you specify in the severeGroupByReason field.
+    # # [Default]
+    # events:
+    #   enabled: true
+    #   severityToExclude: []
+    #   reasonToExclude: []
+    #   severeGroupByReason: []
+
+    # # This allows you to enable or disable monitoring Configurations (ConfigMap, Secret)
+    # # [Default]
+    # configurations:
+    #   enabled: true
+
+  # Configurations for the infrastructure manager (used by cluster collector and infra collectors)
+  infraManagerConfig:
+    # # The log level of the infrastructure manager. (info/debug)
+    # # [Default]
+    # logLevel: info
+
+    # # The maximum size of one log file (in MB).
+    # # [Default]
+    # logFilesMaxSizeMb: 10
+
+    # # The maximum number of log files created before overwriting the oldest one.
+    # # [Default]
+    # logFilesNumBackups: 4
+
+    # # Determines whether logs report through Kubernetes logs.
+    # # [Default]
+    # printToStdout: true
+
+  # Configurations for the container collector
+  containermonConfig:
+    os:
+      - linux
+
+    # # The log level of the collector. (info/debug)
+    # # [Default]
+    # logLevel: info
+
+    # # The maximum size of one log file (in MB).
+    # # [Default]
+    # logFilesMaxSizeMb: 10
+
+    # # The maximum number of log files created before overwriting the oldest one.
+    # # [Default]
+    # logFilesNumBackups: 4
+
+    # # To override the parameters mentioned in this table for a specific operating system.
+    # # For example, if you want to set different logLevel for linux and Windows include the following:
+    # # [Example]
+    # env:
+    #   linux:
+    #     logLevel: info
+    #   windows:
+    #     logLevel: debug
+
+  servermonConfig:
+    os:
+      - linux
+
+    # # The log level of the collector. (info/debug)
+    # # [Default]
+    # logLevel: info
+
+    # # The maximum size of one log file (in MB).
+    # # [Default]
+    # logFilesMaxSizeMb: 10
+
+    # # The maximum number of log files created before overwriting the oldest one.
+    # # [Default]
+    # logFilesNumBackups: 4
+
+    # # To override the parameters mentioned in this table for a specific operating system.
+    # # For example, if you want to set different logLevel for linux and Windows include the following:
+    # # [Example]
+    # env:
+    #   linux:
+    #     logLevel: info
+    #   windows:
+    #     logLevel: debug
+
+  # # Properties for the Cluster Collector pod
+  # # [Default]
+  # clustermonPod:
+
+    # # The cluster collector image address in the format <registryUrl>/<registryAccount>/<project>:<tag>
+    # # [Default]
+    # image: appdynamics/appdynamics-cloud-k8s-monitoring:<latest-available-tag>
+
+    # # Image pull policy for the operator pod.
+    # # [Default]
+    # imagePullPolicy: Always
+
+    # # Resources you assign to the operator pod.
+    # # [Default]
+    # resources:
+    #   limits:
+    #     cpu: 1000m
+    #     memory: 1000Mi
+    #   requests:
+    #     cpu: 500m
+    #     memory: 750Mi
+
+    # # Labels for the pod.
+    # # [Example]
+    # labels:
+    #   key1: "value1"
+    # # [Default]
+    # labels: {}
+
+    # # Annotations for the pod.
+    # # [Example]
+    # annotations:
+    #   key2: "value2"
+    # # [Default]
+    # annotations: {}
+
+    # # Tolerations for the pod.
+    # # [Example]
+    # tolerations:
+    # - key: "key3"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # # [Default]
+    # tolerations: []
+
+    # # Node selector for the pod.
+    # # [Example]
+    # nodeSelector:
+    #   disktype: ssd
+    # # [Default (for linux)]
+    # nodeSelector:
+    #   kubernetes.io/os: linux
+    # # [Default (for windows)]
+    # nodeSelector:
+    #   kubernetes.io/os: windows
+
+    # # Names of any image pull secrets for the pod.
+    # # [Example]
+    # imagePullSecrets:
+    # - name: aws-ecr-secret
+    # # [Default]
+    # imagePullSecrets: []
+
+    # # Affinity for the pod.
+    # # [Example]
+    # affinity:
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #       - matchExpressions:
+    #         - key: key4
+    #           operator: In
+    #           values:
+    #           - value3
+    #           - value4
+    # # [Default]
+    # affinity: {}
+
+    # # Security Context for the pod.
+    # # [Example]
+    # securityContext:
+    #   fsGroupChangePolicy: "OnRootMismatch"
+    # # [Default]
+    # securityContext: {}
+  # # Properties for the Infrastructure Collector pod
+  # # [Default]
+  # inframonPod:
+
+    # # The infrastructure collector image address in the format <registryUrl>/<registryAccount>/<project>:<tag>
+    # # [Default]
+    # image: appdynamics/appdynamics-cloud-k8s-monitoring:<latest-available-tag>
+
+    # # Image pull policy for the operator pod.
+    # # [Default]
+    # imagePullPolicy: Always
+
+    # # Resources you assign to the operator pod.
+    # # [Default (for linux)]
+    # resources:
+    #   limits:
+    #     cpu: 350m
+    #     memory: 100Mi
+    #   requests:
+    #     cpu: 200m
+    #     memory: 64Mi
+    # # [Default (for windows)]
+    # resources:
+    #   limits:
+    #     cpu: 350m
+    #     memory: 300Mi
+    #   requests:
+    #     cpu: 200m
+    #     memory: 150Mi
+
+    # # Labels for the pod.
+    # # [Example]
+    # labels:
+    #   key1: "value1"
+    # # [Default]
+    # labels: {}
+
+    # # Annotations for the pod.
+    # # [Example]
+    # annotations:
+    #   key2: "value2"
+    # # [Default]
+    # annotations: {}
+
+    # # Tolerations for the pod.
+    # # [Example]
+    # tolerations:
+    # - key: "key3"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # # [Default]
+    # tolerations: []
+
+    # # Node selector for the pod.
+    # # [Example]
+    # nodeSelector:
+    #   disktype: ssd
+    # # [Default (for linux)]
+    # nodeSelector:
+    #   kubernetes.io/os: linux
+    # # [Default (for windows)]
+    # nodeSelector:
+    #   kubernetes.io/os: windows
+
+    # # Names of any image pull secrets for the pod.
+    # # [Example]
+    # imagePullSecrets:
+    # - name: aws-ecr-secret
+    # # [Default]
+    # imagePullSecrets: []
+
+    # # Affinity for the pod.
+    # # [Example]
+    # affinity:
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #       - matchExpressions:
+    #         - key: key4
+    #           operator: In
+    #           values:
+    #           - value3
+    #           - value4
+    # # [Default]
+    # affinity: {}
+
+    # # Security Context for the pod.
+    # # [Example]
+    # securityContext:
+    #   fsGroupChangePolicy: "OnRootMismatch"
+    # # [Default]
+    # securityContext: {}
+
+    # # To override the parameters mentioned in this table for a specific operating system.
+    # # For example, if you want to set different imagePullPolicy for linux and Windows include the following:
+    # # [Example]
+    # env:
+    #   linux:
+    #     imagePullPolicy: IfNotPresent
+    #   windows:
+    #     imagePullPolicy: Never
+
+  logCollectorConfig:
+    # OS on which LCA will be installed
+    os:
+      - linux
+    container:
+      # With DefaultConfig, LCA will collect logs from all the pods in that node, except collector logs(Clustermon, InfraMon, LCA, Otel). Default value is true
+      defaultConfig:
+        enabled: true 
+      #These are optional fields for defaultConfig. If nothing is provided, each line will be treated as new line and messageParser will be Timestamp. Customer can override this and give their values.
+        # multiLinePattern: '^{'
+        # multiLineMatch: "after"
+        # multiLineNegate: true
+        # logFormat: "logs:email_logs"
+        # messageParser:           
+        #   json:
+        #     enabled: true
+      # With monitorCollectors enabled, LCA will collect Appd logs(Clustermon, InfraMon, LCA, Otel). Default value is false.        
+      # monitorCollectors: false      
+      # With excludeCondition, we can specify exclude conditions. Logs from pods that match the condition wont be collected. Default value is "". Uncomment to use excludeCondition
+      # excludeCondition:
+        # or:
+        #   - contains:
+        #       kubernetes.namespace: default
+        #   - contains:
+        #       kubernetes.namespace: falco
+        #   - equals:
+        #       k8s.pod.name: log-gen-app-json-linux-669446bcdb-8kngd
+        #   - equals:
+        #       kubernetes.pod.name: log-gen-app-json-linux-669446bcdb-8kngd         
+      # Logs from pods, that match these conditions will be collected. Uncomment to use conditional Configs.
+      # conditionalConfigs:
+      #  - condition:
+      #     or:
+      #       - contains:
+      #           kubernetes.container.name: log-gen-app-log4j-windows
+      #       - contains:
+      #           kubernetes.container.name: log-gen-app-log4j
+      #    config: 
+      #     multiLinePattern: '^\d{4}\-\d{2}\-\d{2}'
+      #     multiLineNegate: true
+      #     multiLineMatch: "after"
+      #     logFormat: "logs:email_logs"
+      #     messageParser:
+      #       log4J:
+      #         enabled: true
+      #         pattern: "%d{yyyy-MM-dd'T'HH:mm:ss} %p %C{1.} [%t] %m%n"
+    # With env.linux or env.windows we can override configs specific to that os.    
+    # env:
+    #   linux: 
+      # container:
+        # defaultConfig:
+        # With DefaultConfig, LCA will collect logs from all the pods in that node, except Appd logs(Clustermon, InfraMon, LCA, Otel). Default value is true
+          # enabled: true 
+        #These are optional fields for defaultConfig. If nothing is provided, each line will be treated as new line and messageParser will be Timestamp. Customer can override this and give their values.
+          # multiLinePattern: '^{'
+          # multiLineMatch: "after"
+          # multiLineNegate: true
+          # logFormat: "logs:email_logs"
+          # messageParser:           
+          #   json:
+          #     enabled: true
+        # With monitorCollectors enabled, LCA will collect Appd logs(Clustermon, InfraMon, LCA, Otel). Default value is false.        
+        # monitorCollectors: false      
+        # With excludeCondition, we can specify exclude conditions. Logs from pods that match the condition wont be collected. Default value is "". Uncomment to use excludeCondition
+        # excludeCondition:
+        #   or:
+        #     - contains:
+        #         kubernetes.namespace: default
+        #     - contains:
+        #         kubernetes.namespace: falco
+        #     - equals:
+        #         k8s.pod.name: log-gen-app-json-linux-669446bcdb-8kngd
+        #     - equals:
+        #         kubernetes.pod.name: log-gen-app-json-linux-669446bcdb-8kngd         
+        # Logs from pods, that match these conditions will be collected. Uncomment to use conditional Configs.
+        # conditionalConfigs:
+        #  - condition:
+        #     or:
+        #       - contains:
+        #           kubernetes.container.name: log-gen-app-log4j-windows
+        #       - contains:
+        #           kubernetes.container.name: log-gen-app-log4j
+        #    config: 
+        #     multiLinePattern: '^\d{4}\-\d{2}\-\d{2}'
+        #     multiLineNegate: true
+        #     multiLineMatch: "after"
+        #     logFormat: "logs:email_logs"
+        #     messageParser:
+        #       log4J:
+        #         enabled: true
+        #         pattern: "%d{yyyy-MM-dd'T'HH:mm:ss} %p %C{1.} [%t] %m%n"           
+appdynamics-otel-collector:
+  clientId: agt_keQPaYdJTpkrGqZ6zlqmT
+  clientSecret: sKsVpEO6L6aLxfjg30O1cF4CNJswVYAa0luQclDszfc
+  endpoint: https://lab1.observe.appdynamics.com/data
+  tokenUrl: https://lab1.observe.appdynamics.com/auth/dfdbdf71-7322-44d0-85fb-36c69a7c3789/default/oauth2/token
