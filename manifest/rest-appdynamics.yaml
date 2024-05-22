@@ -1,9 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rest-appdynamics
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-appdynamics-service
+  namespace: rest-appdynamics
+spec:
+  selector:
+    app: rest-appdynamics
+  ports:
+    - protocol: TCP
+      port: 8083
+      targetPort: 8083
+  type: LoadBalancer
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rest-appdynamics
+  namespace: rest-appdynamics
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: rest-appdynamics
@@ -14,20 +34,25 @@ spec:
     spec:
       containers:
         - name: rest-appdynamics
-          image: hughbrien/rest-appdynamics:release-1.0.0
-
+#          image: hughbrien/rest-appdynamics:release-1.0.0
+          image: hbrien622/rest-appdynamics_amd64:1.0.1
+          imagePullPolicy : Always
           ports:
-            - containerPort: 8000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: rest-appdynamics-service
-spec:
-  selector:
-    app: rest-appdynamics
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+            - containerPort: 8083
+          securityContext :
+            allowPrivilegeEscalation : false
+          livenessProbe :
+            httpGet :
+              path : /actuator
+              port : 8083
+            initialDelaySeconds : 30
+            timeoutSeconds : 15
+          readinessProbe :
+            httpGet :
+              path : /actuator
+              port : 8083
+            initialDelaySeconds : 30
+            periodSeconds : 60
+
+
+
