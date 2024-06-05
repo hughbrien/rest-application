@@ -35,7 +35,7 @@ spec:
       containers:
         - name: rest-appdynamics
 #          image: hughbrien/rest-appdynamics:release-1.0.0
-          image: hbrien622/rest-appdynamics_amd64:1.0.1
+          image: hbrien622/rest-appdynamics_amd64:1.0.2
           imagePullPolicy : Always
           ports:
             - containerPort: 8083

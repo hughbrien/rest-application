@@ -1,0 +1,348 @@
+### Machine
+GET http://localhost:8089/machine
+
+
+### Post test Log
+##
+POST http://localhost:4318/v1/logs
+Content-Type: application/json
+
+{"date":"2024-04-26T20:48:32.205Z",
+  "severity":"info",
+  "class":"LogsExporter",
+  "kind": "exporter",
+  "data_type": "logs",
+  "name": "debug",
+  "log records": {
+    "timeUnixNano": "1581452773000000789",
+    "severityNumber": 9,
+    "severityText": "Info",
+    "body": {
+      "stringValue": "This is a log message"
+    }
+  }
+}
+
+
+### Post Log
+##
+POST http://localhost:4318/v1/logs
+Content-Type: application/json
+
+{
+  "resourceLogs": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "resource-attr-demo",
+            "value": {
+              "stringValue": "resource-attr-demo1"
+            }
+          }
+        ]
+      },
+      "scopeLogs": [
+        {
+          "scope": {},
+          "logRecords": [
+            {
+              "timeUnixNano": "1581452773000000789",
+              "severityNumber": 9,
+              "severityText": "Info",
+              "body": {
+                "stringValue": "This is a log message"
+              },
+              "attributes": [
+                {
+                  "key": "app",
+                  "value": {
+                    "stringValue": "server"
+                  }
+                },
+                {
+                  "key": "instance_num",
+                  "value": {
+                    "intValue": "1"
+                  }
+                }
+              ],
+              "droppedAttributesCount": 1,
+              "traceId": "08040201000000000000000000000000",
+              "spanId": "0102040800000000"
+            },
+            {
+              "timeUnixNano": "1581452773000000789",
+              "severityNumber": 9,
+              "severityText": "Info",
+              "body": {
+                "stringValue": "something happened"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+###
+POST http://localhost:4318/v1/logs
+Content-Type: application/json
+
+{
+  "resourceLogs": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "user_name",
+            "value": {
+              "stringValue": "Hugh Brien"
+            }
+          },
+          {
+            "key": "cloud.availability_zone",
+            "value": {
+              "stringValue": "zone-2"
+            }
+          },
+          {
+            "key": "redundant-attribute",
+            "value": {
+              "stringValue": "Hugh Brien"
+            }
+          },
+          {
+            "key": "email",
+            "value": {
+              "stringValue": "hbrien@cisco.com"
+            }
+          }
+        ]
+      },
+      "scopeLogs": [
+        {
+          "scope": {},
+          "logRecords": [
+            {
+              "timeUnixNano": "1581452773000000789",
+              "severityNumber": 10,
+              "severityText": "Debug",
+              "body": {
+                "stringValue": "Welcome to the End of the Occupation"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+###
+# Post Trace
+POST http://localhost:4318/v1/traces
+Content-Type: application/json
+
+{
+  "name": "hello-salutations",
+  "context": {
+    "trace_id": "0x5b8aa5a2d2c872e8321cf37308d69df2",
+    "span_id": "0x93564f51e1abe1c2"
+  },
+  "parent_id": "0x051581bf3cb55c13",
+  "start_time": "2022-04-26T18:52:58.114492Z",
+  "end_time": "2022-04-26T18:52:58.114631Z",
+  "attributes": {
+    "http.route": "some_route3"
+  },
+  "events": [
+    {
+      "name": "hey there!",
+      "timestamp": "2022-04-29T18:52:58.114561Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    }
+  ]
+}
+
+
+###
+# Post Trace
+POST http://localhost:4318/v1/traces
+Content-Type: application/json
+
+{
+  "name": "hello-greetings",
+  "context": {
+    "trace_id": "0x5b8aa5a2d2c872e8321cf37308d69df2",
+    "span_id": "0x5fb397be34d26b51"
+  },
+  "parent_id": "0x051581bf3cb55c13",
+  "start_time": "2022-04-29T18:52:58.114304Z",
+  "end_time": "2022-04-29T22:52:58.114561Z",
+  "attributes": {
+    "http.route": "some_route2"
+  },
+  "events": [
+    {
+      "name": "hey there!",
+      "timestamp": "2022-04-29T18:52:58.114561Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    },
+    {
+      "name": "bye now!",
+      "timestamp": "2022-04-29T18:52:58.114585Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    }
+  ]
+}
+
+
+###
+# Post Trace
+POST http://localhost:4318/v1/traces
+Content-Type: application/json
+
+{
+  "name": "hello",
+  "context": {
+    "trace_id": "0x5b8aa5a2d2c872e8321cf37308d69df2",
+    "span_id": "0x051581bf3cb55c13"
+  },
+  "parent_id": null,
+  "start_time": "2022-04-29T18:52:58.114201Z",
+  "end_time": "2022-04-29T18:52:58.114687Z",
+  "attributes": {
+    "http.route": "some_route1"
+  },
+  "events": [
+    {
+      "name": "Guten Tag!",
+      "timestamp": "2022-04-29T18:52:58.114561Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    }
+  ]
+}
+
+###
+# Post OLTP Metric Data
+POST http://localhost:4318/v1/metrics
+Content-Type: application/json
+
+{
+  "resourceMetrics": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "resource-attr",
+            "value": {
+              "stringValue": "resource-attr-val-1"
+            }
+          }
+        ]
+      },
+      "scopeMetrics": [
+        {
+          "scope": {},
+          "metrics": [
+            {
+              "name": "counter-int",
+              "unit": "1",
+              "sum": {
+                "dataPoints": [
+                  {
+                    "attributes": [
+                      {
+                        "key": "label-1",
+                        "value": {
+                          "stringValue": "label-value-1"
+                        }
+                      }
+                    ],
+                    "startTimeUnixNano": "1581452773000000789",
+                    "timeUnixNano": "1581452773000000789",
+                    "asInt": "123"
+                  },
+                  {
+                    "attributes": [
+                      {
+                        "key": "label-2",
+                        "value": {
+                          "stringValue": "label-value-2"
+                        }
+                      }
+                    ],
+                    "startTimeUnixNano": "1581452772000000321",
+                    "timeUnixNano": "1581452773000000789",
+                    "asInt": "456"
+                  }
+                ],
+                "aggregationTemporality": 2,
+                "isMonotonic": true
+              }
+            },
+            {
+              "name": "counter-int",
+              "unit": "1",
+              "sum": {
+                "dataPoints": [
+                  {
+                    "attributes": [
+                      {
+                        "key": "label-1",
+                        "value": {
+                          "stringValue": "label-value-1"
+                        }
+                      }
+                    ],
+                    "startTimeUnixNano": "1581452772000000321",
+                    "timeUnixNano": "1581452773000000789",
+                    "asInt": "123"
+                  },
+                  {
+                    "attributes": [
+                      {
+                        "key": "label-2",
+                        "value": {
+                          "stringValue": "label-value-2"
+                        }
+                      }
+                    ],
+                    "startTimeUnixNano": "1581452772000000321",
+                    "timeUnixNano": "1581452773000000789",
+                    "asInt": "456"
+                  }
+                ],
+                "aggregationTemporality": 2,
+                "isMonotonic": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+###
+# GET HeathCheck
+GET http://localhost:13133
+
+###
+# GET HeathCheck
+GET http://localhost:1777/debug/pprof/
+
+
+###
+# Lists of Configuration
+GET http://localhost:55679/debug/servicez

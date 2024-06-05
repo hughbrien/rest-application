@@ -1,6 +1,0 @@
-buildName=master-Analytics_AnalyticsAgent-23.10.0-316
-buildHash=e257bb7fb238325fd0386c93fe19e05ce8b2f326
-buildTimestamp=2023-10-16T10:18:18+0000
-buildNumber=23.10.0-316
-jobName=Analytics_AnalyticsAgent
-version=23.10.0-316

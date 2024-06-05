@@ -1,13 +1,13 @@
 ### Activator
-GET http://localhost:8000/actuator
+GET http://localhost:9000/actuator
 
 ### Welcome
-GET http://localhost:8000/welcome
+GET http://localhost:9000/welcome
 
 ### Greetoing
-GET http://localhost:8000/greeting
+GET http://localhost:9000/greeting
 
 
 ### Activator
-GET http://localhost:8000/greeting
+GET http://localhost:9000/greeting
 

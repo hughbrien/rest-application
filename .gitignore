@@ -4,10 +4,16 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+./application-output*
+
+machineagent/
 /machineagent/**/
 /appagent/**/
 /ClusterConfig/**/
 /analytics-agent/**/
+/sg-java-agent/**
+/multi-tenant-premain-shutdown/**/
+
 
 ### STS ###
 .apt_generated

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.appdynamics</groupId>
 	<artifactId>rest-appdynamics</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>rest-appdynamics</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
