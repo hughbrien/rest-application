@@ -8,7 +8,29 @@
 	<name>rest-appdynamics</name>
 	<description>Demo project for Spring Boot</description>
 ```
-- mvn clean install
+- mvnw clean install
+
+Ensure you have a recent version of Java.  I think 11 or later should work.  I have tested up through version 21
+git clone  https://github.com/hughbrien/rest-application
+```
+cd ./rest-application
+
+./mvnw install
+
+Updates the pom.xml to update the Version
+
+ls ./target
+
+try
+java -jar ./target/rest-appdynamics-0.0.4-SNAPSHOT.jar
+
+cp ./target/rest-appdynamics-0.0.4-SNAPSHOT.jar
+
+
+
+
+```
+
 
 - docker build . -t rest-appdynamics:0.0.2-SNAPSHOT
 

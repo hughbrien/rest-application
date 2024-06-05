@@ -15,6 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
+
 @RestController
 public class GreetingController {
     Logger logger = LoggerFactory.getLogger(GreetingController.class);
@@ -37,7 +38,6 @@ public class GreetingController {
 
     }
 
-
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "machine") String name)  {
         logger.info("Calling the /machine ");
@@ -51,7 +51,7 @@ public class GreetingController {
         results = executeRemoteService("http://10.0.0.43:8083/applicationxd");
         results = executeRemoteService("http://10.0.0.43:8083/applicationxd");
 
-        logger.info("Run Request to SteelStatus and other webapplication");
+        logger.info("Run Request to SteelStatus and other web application");
 
         long testValue = createDelay() * 100;
         logger.info("Setting Cart Value");
