@@ -26,7 +26,7 @@ public class RestAppdynamicsApplication {
 		LOG.info("# # # # # # # # REMOTE_TEST_HOST :: " + REMOTE_TEST_HOST + " # # # # # # # # " );
 
 
-		REMOTE_DEFAULT_PORT = System.getProperty("REMOTE_DEFAULT_PORT", "8883");
+		REMOTE_DEFAULT_PORT = System.getProperty("REMOTE_DEFAULT_PORT", REMOTE_DEFAULT_PORT);
 		LOG.info("# # # # # # # # REMOTE_DEFAULT_PORT :: " + REMOTE_DEFAULT_PORT + " # # # # # # # # " );
 
 
