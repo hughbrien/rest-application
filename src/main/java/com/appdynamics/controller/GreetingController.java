@@ -47,9 +47,9 @@ public class GreetingController {
         results = executeRemoteService("https://www.hughbrien.com");
         results = executeRemoteService("https://www.hughbrien.com/index.html");
         results = executeRemoteService("https://www.steelstratus.com/en");
-        results = executeRemoteService("http://10.0.0.43:8083/welcome");
-        results = executeRemoteService("http://10.0.0.43:8083/applicationxd");
-        results = executeRemoteService("http://10.0.0.43:8083/applicationxd");
+        // results = executeRemoteService("http://10.0.0.43:8083/welcome");
+        // results = executeRemoteService("http://10.0.0.43:8083/applicationxd");
+        // results = executeRemoteService("http://10.0.0.43:8083/applicationxd");
 
         logger.info("Run Request to SteelStatus and other web application");
 
