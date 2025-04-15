@@ -21,13 +21,13 @@ receivers:
 processors:
   resource:
     attributes:
-      - key: appdynamics.controller.account
+      - key: demo.controller.account
         action: upsert
         value: "se-lab"
-      - key: appdynamics.controller.host
+      - key: demo.controller.host
         action: upsert
-        value: "se-lab.saas.appdynamics.com"
-      - key: appdynamics.controller.port
+        value: "se-lab.saas.demo.com"
+      - key: demo.controller.port
         action: upsert
         value: 443
   batch:
@@ -40,8 +40,8 @@ exporters:
   file/combined :
     path : ./otel-agent/logs/combined-all.log
   otlphttp:
-    endpoint: "https://pdx-sls-agent-api.saas.appdynamics.com"
-    headers: {"x-api-key": "b21aef0d4d5241660633bf833337b6a4ad40e27e5668b9c7f96a0ea4b704bbd2"}
+    endpoint: "https://demo"
+    headers: {"x-api-key": ""}
 
 service:
   extensions : [ health_check, pprof, zpages ]
