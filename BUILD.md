@@ -3,9 +3,9 @@
 - Check version number in ./pom.xml file.
 ```
 	<groupId>com.appdynamics</groupId>
-	<artifactId>rest-appdynamics</artifactId>
+	<artifactId>restapplication</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
-	<name>rest-appdynamics</name>
+	<name>restapplication</name>
 	<description>Demo project for Spring Boot</description>
 ```
 - mvnw clean install
@@ -22,9 +22,9 @@ Updates the pom.xml to update the Version
 ls ./target
 
 try
-java -jar ./target/rest-appdynamics-0.0.4-SNAPSHOT.jar
+java -jar ./target/restapplication-0.0.4-SNAPSHOT.jar
 
-cp ./target/rest-appdynamics-0.0.4-SNAPSHOT.jar
+cp ./target/restapplication-0.0.4-SNAPSHOT.jar
 
 
 
@@ -32,7 +32,7 @@ cp ./target/rest-appdynamics-0.0.4-SNAPSHOT.jar
 ```
 
 
-- docker build . -t rest-appdynamics:0.0.2-SNAPSHOT
+- docker build . -t restapplication:0.0.2-SNAPSHOT
 
-- docker buildx build --platform linux/amd64,linux/arm64 --push -t hughbrien/rest-appdynamics:0.0.2-SNAPSHOT .
+- docker buildx build --platform linux/amd64,linux/arm64 --push -t hughbrien/restapplication:0.0.2-SNAPSHOT .
 

@@ -1,22 +1,21 @@
-package com.appdynamics.controller;
+package com.hugenet.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableScheduling
 @SpringBootApplication
-public class RestAppdynamicsApplication {
+public class RestApplication {
 
 	public static String REMOTE_TEST_HOST = "localhost";
 	public static String REMOTE_DEFAULT_PORT = "8083";
 
-	private static final Logger LOG = LoggerFactory.getLogger(RestAppdynamicsApplication.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RestApplication.class);
 
 	public static void main(String[] args)
 	{
@@ -30,8 +29,8 @@ public class RestAppdynamicsApplication {
 		LOG.info("# # # # # # # # REMOTE_DEFAULT_PORT :: " + REMOTE_DEFAULT_PORT + " # # # # # # # # " );
 
 
-		LOG.info("# # # # # # # # Starting RestAppdynamicsApplication # # # # # # # # ");
-		SpringApplication.run(RestAppdynamicsApplication.class, args);
+		LOG.info("# # # # # # # # Starting RestApplication # # # # # # # # ");
+		SpringApplication.run(RestApplication.class, args);
 	}
 
 }

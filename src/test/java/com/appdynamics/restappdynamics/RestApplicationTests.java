@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @SpringBootConfiguration
 @ContextConfiguration
-class RestAppdynamicsApplicationTests {
+class RestApplicationTests {
 
 	@Test
 	void contextLoads() {

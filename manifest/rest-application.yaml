@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: rest-appdynamics
+  name: restapplication
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: rest-appdynamics-service
-  namespace: rest-appdynamics
+  name: restapplication-service
+  namespace: restapplication
 spec:
   selector:
-    app: rest-appdynamics
+    app: restapplication
   ports:
     - protocol: TCP
       port: 8083
@@ -20,22 +20,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rest-appdynamics
-  namespace: rest-appdynamics
+  name: restapplication
+  namespace: restapplication
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: rest-appdynamics
+      app: restapplication
   template:
     metadata:
       labels:
-        app: rest-appdynamics
+        app: restapplication
     spec:
       containers:
-        - name: rest-appdynamics
-#          image: hughbrien/rest-appdynamics:release-1.0.0
-          image: hbrien622/rest-appdynamics_amd64:1.0.2
+        - name: restapplication
+#          image: hughbrien/restapplication:release-1.0.0
+          image: hbrien622/restapplication_amd64:1.0.2
           imagePullPolicy : Always
           ports:
             - containerPort: 8083
