@@ -15,6 +15,3 @@ GET http://localhost:8083/application
 
 ### ApplicationX
 GET http://localhost:8083/applicationx
-
-
-

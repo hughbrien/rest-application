@@ -1,0 +1,28 @@
+
+### Missing Mapping (This won't work due to missing annotation)
+GET http://localhost:8083/api/basic/missingMapping
+Accept: application/json
+
+###
+
+### Null Pointer Exception
+GET http://localhost:8083/api/basic/null-error
+Accept: application/json
+
+###
+
+### Divide by Zero
+GET http://localhost:8083/api/basic/divide-by-zero
+Accept: application/json
+
+###
+
+### Bad Path Variable Usage (Incorrectly uses @RequestParam instead of @PathVariable)
+GET http://localhost:8083/api/basic/bad-path/123
+Accept: application/json
+
+###
+
+### Unhandled Exception
+GET http://localhost:8083/api/basic/unhandled
+Accept: application/json
