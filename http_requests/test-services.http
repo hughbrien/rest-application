@@ -1,0 +1,20 @@
+### Activator
+GET http://localhost:8083/actuator
+
+### Welcome
+GET http://localhost:8083/welcome
+
+### Greeting
+GET http://localhost:8083/greeting
+
+### Health
+GET http://localhost:8083/health
+
+### Application
+GET http://localhost:8083/application
+
+### ApplicationX
+GET http://localhost:8083/applicationx
+
+
+

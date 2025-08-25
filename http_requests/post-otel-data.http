@@ -1,5 +1,5 @@
 ### Machine
-GET http://localhost:8089/machine
+GET http://localhost:8083/machine
 
 
 ### Post test Log

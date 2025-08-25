@@ -40,8 +40,8 @@ exporters:
   file/combined :
     path : ./otel-agent/logs/combined-all.log
   otlphttp:
-    endpoint: "https://pdx-sls-agent-api.saas.appdynamics.com"
-    headers: {"x-api-key": "b21aef0d4d5241660633bf833337b6a4ad40e27e5668b9c7f96a0ea4b704bbd2"}
+    endpoint: "https://ux.hugenet.com"
+    headers: {"x-api-key": "XXXXX"}
 
 service:
   extensions : [ health_check, pprof, zpages ]
