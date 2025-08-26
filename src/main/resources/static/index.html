@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Endpoint Tester</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 5px; padding: 10px; }
+        .response { margin-top: 10px; padding: 10px; border: 1px solid #ccc; white-space: pre-wrap; }
+    </style>
+    <script type="text/javascript" src="https://js-cdn.dynatracelabs.com/jstag/145e049b9b1/bf15279upp/d07415e29161f370_complete.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>API Endpoint Tester</h1>
+
+<div id="buttons"></div>
+<div id="responses"></div>
+
+<script>
+    const endpoints = [
+        "/actuator/health",
+        "/application",
+        "/applicationx",
+        "/check_message",
+        "/error",
+        "/greeting",
+        "/machine",
+        "/welcome"
+    ];
+
+    const buttonsDiv = document.getElementById("buttons");
+    const responsesDiv = document.getElementById("responses");
+
+    endpoints.forEach(endpoint => {
+        const button = document.createElement("button");
+        button.textContent = `Call ${endpoint}`;
+        button.onclick = () => callEndpoint(endpoint);
+        buttonsDiv.appendChild(button);
+
+        const responseBox = document.createElement("div");
+        responseBox.id = `response-${endpoint}`;
+        responseBox.className = "response";
+        responseBox.textContent = `Response from ${endpoint} will appear here.`;
+        responsesDiv.appendChild(responseBox);
+    });
+
+    async function callEndpoint(endpoint) {
+        const responseBox = document.getElementById(`response-${endpoint}`);
+        responseBox.textContent = "Loading...";
+        try {
+            const res = await fetch(endpoint);
+            const text = await res.text();
+            responseBox.textContent = `Status: ${res.status}\n\n${text}`;
+        } catch (error) {
+            responseBox.textContent = `Error: ${error.message}`;
+        }
+    }
+</script>
+</body>
+</html>
