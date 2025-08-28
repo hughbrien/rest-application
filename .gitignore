@@ -45,6 +45,9 @@ build/
 ### VS Code ###
 .vscode/
 
+### GitHub ###
+.github/
+
 ### macOS ###
 .DS_Store
 .DS_Store?
