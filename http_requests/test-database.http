@@ -1,0 +1,37 @@
+### Test Database Connection
+GET http://localhost:8083/users/test-connection
+
+### Get All Users
+GET http://localhost:8083/users
+
+### Get User by ID
+GET http://localhost:8083/users/1
+
+### Search Users by Name
+GET http://localhost:8083/users/search?name=john
+
+### Create New User
+POST http://localhost:8083/users
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test.user@example.com",
+  "age": 29
+}
+
+### Update User (replace {id} with actual user ID)
+PUT http://localhost:8083/users/1
+Content-Type: application/json
+
+{
+  "name": "Updated User",
+  "email": "updated.user@example.com",
+  "age": 31
+}
+
+### Delete User (replace {id} with actual user ID)
+DELETE http://localhost:8083/users/1
+
+### Get Database Statistics
+GET http://localhost:8083/users/stats
