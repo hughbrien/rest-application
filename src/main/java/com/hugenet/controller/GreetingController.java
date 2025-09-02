@@ -24,6 +24,11 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     //private static final String json_template = '{"hello":"World", "name":"value"}'
     private final AtomicLong counter = new AtomicLong();
+    
+    // Tracking for application method slow downs
+    private int currentHour = -1;
+    private int slowDownCount = 0;
+    private static final int MAX_SLOW_DOWNS_PER_HOUR = 10;
 
     @GetMapping("/machine")
     public String machine(@RequestParam(value = "name", defaultValue = "World") String name) {
@@ -41,6 +46,22 @@ public class GreetingController {
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "machine") String name)  {
         logger.info("Calling the /machine ");
+
+        // Check if we're in the slow period (first 5 minutes of each hour)
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+        int minutes = now.getMinute();
+        if (minutes < 5) {
+            logger.info("Entering slow period - first 5 minutes of the hour");
+            try {
+                // Add extra 2-5 second delay during slow period
+                int slowDelay = (int) (Math.random() * 3000) + 2000; // 2-5 seconds
+                Thread.sleep(slowDelay);
+                logger.info("Applied slow period delay of {} ms", slowDelay);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                logger.error("Slow period delay interrupted", e);
+            }
+        }
 
         logger.info("Calling the Remote Service ");
         String results = "";
@@ -78,10 +99,44 @@ public class GreetingController {
     @GetMapping("/application")
     public String application(@RequestParam(value = "name", defaultValue = "World") String name) {
         logger.info("Calling the /application ");
+        
+        // Check current hour and reset counter if needed
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+        int hour = now.getHour();
+        
+        if (currentHour != hour) {
+            currentHour = hour;
+            slowDownCount = 0;
+            logger.info("New hour detected: {}:00. Reset slow down counter.", hour);
+        }
+        
+        // Apply random slow down if we haven't reached the limit for this hour
+        if (slowDownCount < MAX_SLOW_DOWNS_PER_HOUR) {
+            // Random chance to trigger slow down (about 20% chance per request)
+            double randomChance = Math.random();
+            if (randomChance < 0.2) {
+                slowDownCount++;
+                logger.info("Triggering slow down #{} for hour {}", slowDownCount, hour);
+                
+                try {
+                    // Random delay between 10-15 seconds (10000-15000 ms)
+                    int slowDelay = (int) (Math.random() * 5000) + 10000;
+                    Thread.sleep(slowDelay);
+                    logger.info("Applied random slow delay of {} ms", slowDelay);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    logger.error("Random slow delay interrupted", e);
+                }
+            }
+        }
+        
         long counter_value = counter.incrementAndGet();
-        String myTemplate = "Hello, %s!";
-
-        return String.format(template, counter);
+        String results;
+        results = executeRemoteService("https://www.hughbrien.com");
+        results = executeRemoteService("https://www.hughbrien.com/index.html");
+        results = executeRemoteService("https://www.steelstratus.com/en");
+        
+        return String.format(template, counter_value);
     }
 
 
