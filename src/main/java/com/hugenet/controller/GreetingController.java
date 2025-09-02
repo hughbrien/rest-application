@@ -145,12 +145,21 @@ public class GreetingController {
         logger.info("Calling the /check_message ");
         long counter_value = counter.incrementAndGet();
         String myTemplate = "Hello, %s!";
-        logger.info("Throwing an exception");
-        try {
-            throw new Exception("Demo");
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
+        
+        // Random failure - 10% chance to throw exception
+        double randomChance = Math.random();
+        if (randomChance < 0.1) {
+            logger.info("Randomly triggering exception ({}% chance)", 10);
+            try {
+                throw new Exception("Demo - Random failure occurred");
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         }
+        
+        // 90% of the time, return success message
+        logger.info("Request successful - no exception thrown");
+        return String.format("Success! Hello, %s! Counter: %d", name, counter_value);
     }
 
     public  void runClient(String service_url) {
