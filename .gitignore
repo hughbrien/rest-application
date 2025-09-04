@@ -6,6 +6,9 @@ target/
 
 ./application-output*
 
+opentelemetry-javaagent.jar
+
+
 /*.
 /application-output*
 machineagent/
