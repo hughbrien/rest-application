@@ -16,11 +16,12 @@ We are going to configure the following
 https://github.com/hughbrien/frontend
 https://github.com/hughbrien/rest-application
 
-# Here are the steps 
+### Here are the steps 
 
-- Git clone https://github.com/hughbrien/rest-application
-- .vscode/mcp.json
+- git clone https://github.com/hughbrien/rest-application
+- create the .vscode/mcp.json
 - create .env file with your tokens
+- Run the folloing command "load dynatrace mcp"
 
 # Create the MCP file 
 in the .vscode / mcp.json file 
