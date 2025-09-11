@@ -10,13 +10,20 @@ The Dynatrace MCP server will typtically running locally using a command that lo
 rest-application % npx -y @dynatrace-oss/dynatrace-mcp-server@0.5.0
 [dotenv@17.2.2] injecting env (3) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
 Initializing Dynatrace MCP Server v0.5.0...
+
 Testing connection to Dynatrace environment: https://id.domain.apps.dynatracelabs.com... (Attempt 1 of 5)
+
 Trying to authenticate API Calls to https://<ID>.<domain>.apps.dynatracelabs.com via OAuthClientId dxyzid.ABCDEFG with the following scopes: app-engine:apps:run, app-engine:functions:run
+
 Using SSO auth URL: https://sso-sprint.dynatracelabs.com/sso/oauth2/token
 Successfully retrieved token from SSO!
+
 Successfully connected to the Dynatrace environment at https://id.domain.apps.dynatracelabs.com.
+
 Starting Dynatrace MCP Server v0.5.0...
+
 Connecting server to transport...
+
 Dynatrace MCP Server running on stdio
 
 ```
