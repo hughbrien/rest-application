@@ -52,6 +52,6 @@ DT_ENVIRONMENT=https://<id>.<>.apps.dtlab.com
 Copy the following files into the .github directory  in hour project : 
 https://github.com/dynatrace-oss/dynatrace-mcp
 
-./.gihub 
-./dynatrace-agent-rules
+- ./.gihub 
+- ./dynatrace-agent-rules
 
