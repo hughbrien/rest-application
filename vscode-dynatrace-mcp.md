@@ -7,7 +7,8 @@ A couple of notes :
 The Dynatrace MCP server will typtically running locally using a command that looks like 
 
 ```
-bash$  **npx -y @dynatrace-oss/dynatrace-mcp-server@0.5.0**
+bash$  npx -y @dynatrace-oss/dynatrace-mcp-server@0.5.0
+
 [dotenv@17.2.2] injecting env (3) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
 Initializing Dynatrace MCP Server v0.5.0...
 
