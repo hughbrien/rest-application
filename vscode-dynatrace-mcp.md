@@ -2,7 +2,12 @@
 
 A couple of notes : 
 
+- [Dynatrace MCP Server ](https://github.com/dynatrace-oss/dynatrace-mcp)
+
 The Dynatrace MCP server will typtically running locally using a command that looks like 
+
+
+
 
 ## Configuration and Setup 
 
