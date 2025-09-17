@@ -1,0 +1,17 @@
+- name: Send events to Dynatrace
+    uses: dynatrace-oss/dynatrace-github-action@v9
+    with:
+      url: ${{ secrets.DT_URL }}
+      token: ${{ secrets.DT_TOKEN }}
+      events: |
+        - title: GitHub Event
+          type: CUSTOM_INFO
+          entitySelector: type(host),entityName(myHost)
+          properties:
+            source: GitHub
+            description: This is an example
+            github.repository: "${{ github.repository }}"
+            github.ref: "${{ github.ref }}"
+            github.event_name: "${{ github.event_name }}"
+            github.actor: "${{ github.actor }}"
+          
