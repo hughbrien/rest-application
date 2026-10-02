@@ -2,12 +2,15 @@
 # Run the Build and Deployoment
 #
 
-FROM amazoncorretto:21.0.1
+FROM amazoncorretto:25
 
 WORKDIR /app
 
-COPY ./target/rest-application-0.9.1-SNAPSHOT.jar /app/rest-application-0.9.2-SNAPSHOT.jar
+# Build with `./mvnw clean package` first; the jar name must match pom.xml <version>.
+ARG JAR_FILE=target/rest-application-0.9.2.jar
+COPY ${JAR_FILE} /app/rest-application.jar
 
-EXPOSE 8000
-#CMD ["/bin/sh"]
-CMD [ "java", "-Xmn256m", "-Xmx768m", "-jar", "/app/rest-application-0.9.2-SNAPSHOT.jar" ]
+# Must match server.port in application.properties.
+EXPOSE 8083
+
+CMD [ "java", "-Xmn256m", "-Xmx768m", "-jar", "/app/rest-application.jar" ]

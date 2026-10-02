@@ -85,7 +85,7 @@ public class GreetingController {
     private static String executeRemoteService(String url_string) {
         String results;
         try {
-            URL url = new URL(url_string);
+            URL url = URI.create(url_string).toURL();
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();

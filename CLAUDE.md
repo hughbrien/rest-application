@@ -6,12 +6,12 @@ Spring Boot REST API demo application (v0.9.2) designed for observability testin
 
 ## Tech Stack
 
-- **Language:** Java 17
-- **Framework:** Spring Boot 3.1.5
-- **Build:** Maven 3.9.5 (use Maven Wrapper: `./mvnw`)
+- **Language:** Java 25
+- **Framework:** Spring Boot 4.1.1
+- **Build:** Maven 3.9.16 (use Maven Wrapper: `./mvnw`)
 - **Test:** JUnit 5 (via spring-boot-starter-test)
 - **Template Engine:** Freemarker
-- **Containerization:** Docker (Amazon Corretto 21 base image)
+- **Containerization:** Docker (Amazon Corretto 25 base image)
 - **Orchestration:** Kubernetes (3-replica deployment)
 
 ## Build & Run Commands
@@ -27,7 +27,7 @@ Spring Boot REST API demo application (v0.9.2) designed for observability testin
 ./mvnw test
 
 # Run locally (port 8083)
-java -jar ./target/rest-application-0.9.1-SNAPSHOT.jar
+java -jar ./target/rest-application-0.9.2.jar
 
 # Docker
 docker build . -t restapplication:latest
@@ -50,7 +50,7 @@ src/main/resources/
   application.properties     # server.port=8083, logging config
   static/index.html          # Interactive API tester UI
 
-src/test/java/com/appdynamics/restappdynamics/
+src/test/java/com/hugenet/controller/
   RestApplicationTests.java  # Spring context load test (JUnit 5)
 
 manifest/                    # Kubernetes deployment YAML
@@ -91,15 +91,15 @@ http_requests/               # IntelliJ HTTP Client test files
 | File | Key Settings |
 |------|-------------|
 | `application.properties` | `server.port=8083`, logging to `./application-output.log` |
-| `pom.xml` | Java 17, Spring Boot 3.1.5, Paketo buildpacks |
-| `Dockerfile` | Corretto 21, `-Xmn256m -Xmx768m`, exposes port 8000 |
+| `pom.xml` | Java 25, Spring Boot 4.1.1, Paketo buildpacks |
+| `Dockerfile` | Corretto 25, `-Xmn256m -Xmx768m`, exposes port 8083 |
 | `manifest/rest-application.yaml` | Namespace `restapplication`, 3 replicas, LoadBalancer on 8083 |
 
 ## Testing
 
 - **Unit tests:** `./mvnw test` - runs JUnit 5 via Spring Boot test starter
 - **Manual API tests:** `http_requests/*.http` files (IntelliJ HTTP Client format)
-- **Note:** Test package (`com.appdynamics.restappdynamics`) differs from main source package (`com.hugenet.controller`)
+- **Note:** Tests live in `com.hugenet.controller`, matching the main sources, so `@SpringBootTest` discovers `RestApplication` automatically
 
 ## CI/CD
 
@@ -109,8 +109,8 @@ http_requests/               # IntelliJ HTTP Client test files
 
 1. **Do not "fix" intentional errors** in `BasicController.java` - the null pointers, division by zero, and bad annotations are deliberate for monitoring demos.
 2. **Do not remove `Thread.sleep()` calls** - synthetic delays in `GreetingController` and `WelcomeController` simulate real-world latency for observability testing.
-3. **Package mismatch is known** - test package is `com.appdynamics.restappdynamics` while main code is `com.hugenet.controller`. This is a legacy artifact.
-4. **No linting/formatting tools configured** - no Checkstyle, SpotBugs, or PMD plugins. Follow existing code style (standard Spring Boot conventions).
-5. **Version is in `pom.xml`** - currently `0.9.1`. Update there when bumping versions.
-6. **The app is stateless** - no database, no persistent storage. All counters reset on restart.
-7. **Port mismatch in Dockerfile** - Dockerfile `EXPOSE 8000` but app runs on `8083` per `application.properties`. This is a known inconsistency.
+3. **No linting/formatting tools configured** - no Checkstyle, SpotBugs, or PMD plugins. Follow existing code style (standard Spring Boot conventions).
+4. **Version is in `pom.xml`** - currently `0.9.2` (not a `-SNAPSHOT`), so the built artifact is `target/rest-application-0.9.2.jar`. Update `pom.xml` and the `JAR_FILE` arg in `Dockerfile` together when bumping versions.
+5. **The app is stateless** - no database, no persistent storage. All counters reset on restart.
+6. **Mockito runs as an explicit `-javaagent`** - `maven-dependency-plugin:properties` resolves the jar path for surefire's `argLine`. Self-attaching is disallowed on current JDKs, so keep both plugin blocks in `pom.xml`.
+7. **Freemarker has no `templates/` directory** - the UI is `static/index.html`, so `spring.freemarker.check-template-location=false` is set deliberately.

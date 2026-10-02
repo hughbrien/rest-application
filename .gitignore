@@ -1,15 +1,13 @@
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ./application-output*
 
 opentelemetry-javaagent.jar
+./otel-agent/otel-config.yaml
 
-
-/*.
 /application-output*
 machineagent/
 /machineagent/**/
@@ -30,7 +28,16 @@ machineagent/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+# Share project-level config (JDK level, compiler, run configs); ignore local state.
+.idea/*
+!.idea/misc.xml
+!.idea/compiler.xml
+!.idea/encodings.xml
+!.idea/jarRepositories.xml
+!.idea/runConfigurations/
+.idea/workspace.xml
+.idea/shelf/
+.idea/httpRequests/
 *.iws
 *.iml
 *.ipr
@@ -49,7 +56,7 @@ build/
 .vscode/
 
 ### GitHub ###
-.github/
+# (.github/ holds CI workflow config and must stay tracked.)
 
 ### macOS ###
 .DS_Store
