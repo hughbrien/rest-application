@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="rest-application" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.hugenet.controller.RestApplication" />
+    <option name="VM_PARAMETERS" value="-Djava.rmi.server.hostname=127.0.0.1 -javaagent:./opentelemetry-javaagent.jar -Dotel.service.name=rest-application  -Dotel.exporter.otlp.endpoint=http://localhost:4318 -Dotel.metrics.exporter=none" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
