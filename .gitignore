@@ -8,6 +8,13 @@ target/
 opentelemetry-javaagent.jar
 ./otel-agent/otel-config.yaml
 
+./run-with-dynatrace.sh
+run-with-dynatrace.sh
+synthetic/run.sh
+/otelcol
+/nohup.out
+./opentelemetry-javaagent.jar
+*tz.gz
 /application-output*
 machineagent/
 /machineagent/**/
