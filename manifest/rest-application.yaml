@@ -34,8 +34,7 @@ spec:
     spec:
       containers:
         - name: rest-application
-#          image: hughbrien/rest-application:0.9.2
-          image: hbrien622/rest-application:0.9.2
+          image: hbrien622/rest-application:1.0.1
           imagePullPolicy : Always
           ports:
             - containerPort: 8083
