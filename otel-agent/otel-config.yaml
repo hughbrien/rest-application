@@ -1,0 +1,57 @@
+## Otel Configuration for AppDynamics Java Agent
+## Traces and logs (no metrics pipeline yet)
+
+extensions:
+  health_check:
+    check_collector_pipeline:
+      enabled: true
+      interval: "15s"
+      exporter_failure_threshold: 5
+  pprof:
+    endpoint: localhost:1777
+  zpages:
+    endpoint: localhost:55679
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  resource:
+    attributes:
+      - key: general-account
+        action: upsert
+        value: "rest-application-demo"
+      - key: author
+        action: upsert
+        value: "Hugh Brien"
+  batch:
+    timeout: 5s
+
+exporters:
+  debug :
+    verbosity : detailed
+  file/combined :
+    path : ./otel-agent/logs/combined-all.log
+    rotation:
+      max_megabytes: 50
+      max_backups: 3
+  otlp_http:
+    endpoint: https://uim8926h.sprint.dynatracelabs.com/api/v2/otlp
+    headers:
+      Authorization: "Bearer ${env:DT_PLATFORM_TOKEN}"  # export DT_PLATFORM_TOKEN before starting otelcol
+
+service:
+  extensions : [ health_check, pprof, zpages ]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [otlp_http, file/combined]
+    logs:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [otlp_http, file/combined]
+
